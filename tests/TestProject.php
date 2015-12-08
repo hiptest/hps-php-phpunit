@@ -5,7 +5,7 @@ class CoffeeMachineHiptestPublisherSampleTest extends PHPUnit_Framework_TestCase
   public $actionwords;
 
   public function setUp() {
-    $this->actionwords = new Actionwords($this);
+    $this->actionwords = new Actionwords();
   }
 
   public function simpleUse($lang, $ready_message) {

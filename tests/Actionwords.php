@@ -3,11 +3,9 @@ require_once('src/CoffeeMachine.php');
 
 class Actionwords {
   var $sut;
-  var $tests;
 
-  function __construct($tests) {
+  function __construct() {
     $this->sut = new CoffeeMachine();
-    $this->tests = $tests;
   }
 
   public function iStartTheCoffeeMachine($lang = "en") {
@@ -19,15 +17,15 @@ class Actionwords {
   }
 
   public function messageMessageShouldBeDisplayed($message) {
-    $this->tests->assertEquals($message, $this->sut->getMessage());
+    PHPUnit_Framework_Assert::assertEquals($message, $this->sut->getMessage());
   }
 
   public function coffeeShouldBeServed() {
-    $this->tests->assertTrue($this->sut->coffeeServed);
+    PHPUnit_Framework_Assert::assertTrue($this->sut->coffeeServed);
   }
 
   public function coffeeShouldNotBeServed() {
-    $this->tests->assertFalse($this->sut->coffeeServed);
+    PHPUnit_Framework_Assert::assertFalse($this->sut->coffeeServed);
   }
 
   public function iTakeACoffee() {
