@@ -7,31 +7,28 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
     $this->actionwords = new Actionwords();
   }
 
-  public function simpleUse($lang, $ready_message) {
-    // Well, sometimes, you just get a coffee.
-    // Given I start the coffee machine
-    $this->actionwords->iStartTheCoffeeMachine();
-    // When I take a coffee
-    $this->actionwords->iTakeACoffee();
+  public function testBeansRunOutUid5beb658d06984a0aa8bb684329869b90() {
+    // Given the coffee machine is started
+    $this->actionwords->theCoffeeMachineIsStarted();
+    // When thirty eight coffees are taken without filling beans
+    $this->actionwords->thirtyEightCoffeesAreTakenWithoutFillingBeans();
     // Then coffee should be served
     $this->actionwords->coffeeShouldBeServed();
+    // And message "Fill beans" should be displayed
+    $this->actionwords->messageMessageShouldBeDisplayed("Fill beans");
+    // When I take "2" coffees
+    $this->actionwords->iTakeCoffeeNumberCoffees(2);
+    // Then coffee should be served
+    $this->actionwords->coffeeShouldBeServed();
+    // And message "Fill beans" should be displayed
+    $this->actionwords->messageMessageShouldBeDisplayed("Fill beans");
+    // When I take a coffee
+    $this->actionwords->iTakeACoffee();
+    // Then coffee should not be served
+    $this->actionwords->coffeeShouldNotBeServed();
   }
 
-  public function testSimpleUseEnglish() {
-    $this->simpleUse('en', 'Ready');
-  }
-
-  public function testSimpleUseFrench() {
-    $this->simpleUse('fr', 'Pret');
-  }
-
-  public function testSimpleUse() {
-    $this->simpleUse('', '');
-  }
-
-
-  public function testWaterRunsAway() {
-    // Simple scenario showing that after 50 coffees, the "Fill tank" message is displayed but it is still possible to have coffee until the tank is fully empty.
+  public function testWaterRunsAwayUid37da9fe6383647058ddbb8e4bae00d73() {
     // Given the coffee machine is started
     $this->actionwords->theCoffeeMachineIsStarted();
     // When fifty coffees have been taken without filling the tank
@@ -54,30 +51,7 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
     $this->actionwords->messageMessageShouldBeDisplayed("Ready");
   }
 
-  public function testBeansRunOut() {
-    // Simple scenario showing that after 38 coffees, the message "Fill beans" is displayed but it is possible to take two coffees until there is no more beans.
-    // Given the coffee machine is started
-    $this->actionwords->theCoffeeMachineIsStarted();
-    // When thirty eight coffees are taken without filling beans
-    $this->actionwords->thirtyEightCoffeesAreTakenWithoutFillingBeans();
-    // Then coffee should be served
-    $this->actionwords->coffeeShouldBeServed();
-    // And message "Fill beans" should be displayed
-    $this->actionwords->messageMessageShouldBeDisplayed("Fill beans");
-    // When I take "2" coffees
-    $this->actionwords->iTakeCoffeeNumberCoffees(2);
-    // Then coffee should be served
-    $this->actionwords->coffeeShouldBeServed();
-    // And message "Fill beans" should be displayed
-    $this->actionwords->messageMessageShouldBeDisplayed("Fill beans");
-    // When I take a coffee
-    $this->actionwords->iTakeACoffee();
-    // Then coffee should not be served
-    $this->actionwords->coffeeShouldNotBeServed();
-  }
-
-  public function testFullGroundsDoesNotBlockCoffee() {
-    // You keep getting coffee even if the "Empty grounds" message is displayed. That said it's not a fantastic idea, you'll get ground everywhere when you'll decide to empty it.
+  public function testFullGroundsDoesNotBlockCoffeeUid96ba26401ca14cf99ffebcfa8e25ed7b() {
     // Given the coffee machine is started
     $this->actionwords->theCoffeeMachineIsStarted();
     // When I take "29" coffees
@@ -102,25 +76,41 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
     $this->actionwords->messageMessageShouldBeDisplayed("Empty grounds");
   }
 
+  public function simpleUse($lang, $ready_message) {
+    // Given I start the coffee machine "<lang>"
+    $this->actionwords->iStartTheCoffeeMachine($lang);
+    // When I take a coffee
+    $this->actionwords->iTakeACoffee();
+    // Then coffee should be served
+    $this->actionwords->coffeeShouldBeServed();
+  }
+
+  public function testSimpleUseEnglishUid8978def826d94cc6a3aedcc21c2d83c6() {
+    $this->simpleUse('en', 'Ready');
+  }
+
+  public function testSimpleUseFrenchUid47d9311c7575436aa3ede49b87c8ef01() {
+    $this->simpleUse('fr', 'Pret');
+  }
+
+
   public function messagesAreBasedOnLanguage($lang, $ready_message) {
-    // Well, sometimes, you just get a coffee.
-    // When I start the coffee machine
-    $this->actionwords->iStartTheCoffeeMachine();
+    // When I start the coffee machine "<lang>"
+    $this->actionwords->iStartTheCoffeeMachine($lang);
     // Then message "<ready_message>" should be displayed
     $this->actionwords->messageMessageShouldBeDisplayed($ready_message);
   }
 
-  public function testMessagesAreBasedOnLanguageEnglish() {
+  public function testMessagesAreBasedOnLanguageEnglishUid4aa34a604f9c472abd7a430bfdc74999() {
     $this->messagesAreBasedOnLanguage('en', 'Ready');
   }
 
-  public function testMessagesAreBasedOnLanguageFrench() {
+  public function testMessagesAreBasedOnLanguageFrenchUidDae977f87dd4435dadc083ef2271464a() {
     $this->messagesAreBasedOnLanguage('fr', 'Pret');
   }
 
 
-  public function testNoMessagesAreDisplayedWhenMachineIsShutDown() {
-    // Tags: plop
+  public function testNoMessagesAreDisplayedWhenMachineIsShutDownUid61d627c93c494bc7ac4ac33a47a62f11() {
     // Given the coffee machine is started
     $this->actionwords->theCoffeeMachineIsStarted();
     // When I shutdown the coffee machine
