@@ -9,12 +9,11 @@ before_install:
   - rvm use 2.2
   - gem install hiptest-publisher
   - hiptest-publisher -c phpunit.conf --only=tests --test-run-id=11084
-  - phpunit -v
 
 script:
   - phpunit tests/TestProject.php --log-junit results.xml
+  - ls -lah
 
 after_script:
-  - ls -lah
   - less results.xml
   - hiptest-publisher -c phpunit.conf --push=results.xml --test-run-id=11084
