@@ -1,15 +1,23 @@
-hps-php-phpunit
-===============
+# hps-php-phpunit
 
-Hiptest publisher samples using PHP/PHPUnit
+[![Build Status](https://travis-ci.org/hiptest/hps-php-phpunit.svg?branch=master)](https://travis-ci.org/hiptest/hps-php-phpunit)
 
-# Update tests
+Hiptest publisher samples with PHP/PHPUnit
 
-```
-hiptest-publisher --config phpunit.conf --only=tests
-```
+In this repository you'll find tests generated in PHPUnit format from [Hiptest](https://hiptest.net), using [Hiptest publisher](https://github.com/hiptest/hiptest-publisher).
 
-# Run tests
+The goals are:
+
+ * to show how tests are exported in PHP/PHPUnit.
+ * to check exports work out of the box (well, with implemented actionwords in PHP)
+
+System under test
+------------------
+
+The SUT is a (not that much) simple coffee machine. You start it, you ask for a coffee and you get it, sometimes. But most of times you have to add water or beans, empty the grounds. You have an automatic expresso machine at work or at home? So you know how it goes :-)
+
+PHP install
+-----------
 
 You need PHP and [PHPUnit](https://phpunit.de/) to run generated tests. If you
 do not have them installed on your OS, the easiest way I found is to use the [phpunit/phpunit](https://hub.docker.com/r/phpunit/phpunit/) docker image.
@@ -22,8 +30,25 @@ docker pull phpunit/phpunit:5.0.3
 docker run -t -v $(pwd):/app phpunit/phpunit:5.0.3 tests
 ```
 
-If you have phpunit installed, you can run test with the following command:
 
-```
-phpunit tests
-```
+Update tests
+-------------
+
+
+To update the tests:
+
+    hiptest-publisher --config phpunit.conf --only=tests
+
+The tests are generated in [``tests/ProjectTest.php``](https://github.com/hiptest/hps-php-phpunit/blob/master/tests/TestProject.php)
+
+
+Run tests
+---------
+
+To build the project and run the tests, use the following command:
+
+    phpunit tests/ProjectTest.php --log-junit results.xml
+
+The SUT implementation can be seen in [``src/CoffeeMachine.php``](https://github.com/hiptest/hps-php-phpunit/blob/master/src/CoffeeMachine.php)
+
+The test report is generated in ```results.xml```
