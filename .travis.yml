@@ -14,4 +14,3 @@ script:
 
 after_script:
   - hiptest-publisher -c phpunit.conf --push=results.xml --test-run-id=11084
-
