@@ -47,8 +47,8 @@ Run tests
 
 To build the project and run the tests, use the following command:
 
-    phpunit tests/TestProject.php --log-junit results.xml
+    phpunit tests/TestProject.php --tap >> results.tap
 
 The SUT implementation can be seen in [``src/CoffeeMachine.php``](https://github.com/hiptest/hps-php-phpunit/blob/master/src/CoffeeMachine.php)
 
-The test report is generated in ```results.xml```
+The test report is generated in ```results.tap```
