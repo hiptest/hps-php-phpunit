@@ -14,5 +14,4 @@ script:
   - phpunit --configuration config.xml --log-junit results.xml
 
 after_script:
-  - cat results.xml
   - hiptest-publisher -c phpunit.conf --push=results.xml --test-run-id=11084

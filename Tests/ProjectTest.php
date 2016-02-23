@@ -1,7 +1,7 @@
 <?php
 require_once('Actionwords.php');
 
-class CoffeeMachineHiptestPublisherSampleTest extends PHPUnit_Framework_TestCase {
+class ProjectTest extends PHPUnit_Framework_TestCase {
   public $actionwords;
   public function setUp() {
     $this->actionwords = new Actionwords();

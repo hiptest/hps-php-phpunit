@@ -39,7 +39,7 @@ To update the tests:
 
     hiptest-publisher --config phpunit.conf --only=tests
 
-The tests are generated in [``tests/ProjectTest.php``](https://github.com/hiptest/hps-php-phpunit/blob/master/tests/TestProject.php)
+The tests are generated in [``tests/ProjectTest.php``](https://github.com/hiptest/hps-php-phpunit/blob/master/tests/ProjectTest.php)
 
 
 Run tests
