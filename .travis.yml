@@ -14,4 +14,5 @@ script:
   - phpunit tests/TestProject.php --tap >> results.tap
 
 after_script:
+  - cat results.tap
   - hiptest-publisher -c phpunit.conf --push=results.tap --test-run-id=11084
