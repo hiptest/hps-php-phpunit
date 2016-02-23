@@ -3,29 +3,19 @@ require_once('Actionwords.php');
 
 class CoffeeMachineHiptestPublisherSampleTest extends PHPUnit_Framework_TestCase {
   public $actionwords;
-
   public function setUp() {
     $this->actionwords = new Actionwords();
   }
 
-  public function simpleUse($lang, $ready_message) {
+  public function testSimpleUse() {
     // Well, sometimes, you just get a coffee.
-    // Given I start the coffee machine "<lang>"
-    $this->actionwords->iStartTheCoffeeMachine($lang);
+    // Given the coffee machine is started
+    $this->actionwords->theCoffeeMachineIsStarted();
     // When I take a coffee
     $this->actionwords->iTakeACoffee();
     // Then coffee should be served
     $this->actionwords->coffeeShouldBeServed();
   }
-
-  public function testSimpleUseEnglish() {
-    $this->simpleUse('en', 'Ready');
-  }
-
-  public function testSimpleUseFrench() {
-    $this->simpleUse('fr', 'Pret');
-  }
-
 
   public function testWaterRunsAway() {
     // Simple scenario showing that after 50 coffees, the "Fill tank" message is displayed but it is still possible to have coffee until the tank is fully empty.
