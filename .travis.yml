@@ -11,8 +11,7 @@ before_install:
   - hiptest-publisher -c phpunit.conf --only=tests --test-run-id=11084
 
 script:
-  - phpunit tests/TestProject.php --tap >> results.tap
+  - phpunit --configuration config.xml --log-junit results.xml
 
 after_script:
-  - cat results.tap
-  - hiptest-publisher -c phpunit.conf --push=results.tap --test-run-id=11084
+  - hiptest-publisher -c phpunit.conf --push=results.xml --test-run-id=11084
