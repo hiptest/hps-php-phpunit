@@ -6,6 +6,9 @@ class Actionwords {
 
   function __construct() {
     $this->sut = new CoffeeMachine();
+    $this->handleWaterTank = false;
+    $this->handleBeans = false;
+    $this->handleCoffeeGrounds = false;
   }
 
   public function iStartTheCoffeeMachine($lang = "en") {
@@ -48,6 +51,18 @@ class Actionwords {
     while (($coffee_number > 0)) {
       $this->iTakeACoffee();
       $coffee_number = $coffee_number - 1;
+
+      if ($this->handleWaterTank) {
+        $this->sut->fillTank();
+      }
+
+      if ($this->handleBeans) {
+        $this->sut->fillBeans();
+      }
+
+      if ($this->handleCoffeeGrounds) {
+        $this->sut->emptyGrounds();
+      }
     }
   }
 
@@ -55,20 +70,31 @@ class Actionwords {
     $this->iStartTheCoffeeMachine();
   }
 
-  public function fiftyCoffeesHaveBeenTakenWithoutFillingTheTank() {
-    $this->iTakeCoffeeNumberCoffees(30);
-    $this->iFillTheBeansTank();
-    $this->iEmptyTheCoffeeGrounds();
-    $this->iTakeCoffeeNumberCoffees(20);
-    $this->iFillTheBeansTank();
-    $this->iEmptyTheCoffeeGrounds();
+  public function iHandleWaterTank() {
+    $this->handleWaterTank = true;
   }
 
-  public function thirtyEightCoffeesAreTakenWithoutFillingBeans() {
-    $this->iTakeCoffeeNumberCoffees(37);
-    $this->iEmptyTheCoffeeGrounds();
-    $this->iFillTheWaterTank();
-    $this->iTakeACoffee();
+  public function iHandleBeans() {
+    $this->handleBeans = true;
+  }
+
+  public function iHandleCoffeeGrounds() {
+    $this->handleCoffeeGrounds = true;
+  }
+
+  public function iHandleEverythingExceptTheWaterTank() {
+    $this->iHandleCoffeeGrounds();
+    $this->iHandleBeans();
+  }
+
+  public function iHandleEverythingExceptTheBeans() {
+    $this->iHandleWaterTank();
+    $this->iHandleCoffeeGrounds();
+  }
+
+  public function iHandleEverythingExceptTheGrounds() {
+    $this->iHandleWaterTank();
+    $this->iHandleBeans();
   }
 }
 ?>

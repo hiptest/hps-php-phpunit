@@ -3,7 +3,11 @@
 <phpunit bootstrap="Tests/bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="Coffee machine">
-            <file>Tests/ProjectTest.php</file>
+            <file>Tests/ErrorMessages/BeansTest.php</file>
+            <file>Tests/ErrorMessages/GroundsTest.php</file>
+            <file>Tests/ErrorMessages/WaterTest.php</file>
+            <file>Tests/NominalCaseTest.php</file>
+            <file>Tests/WeirdSpecsTest.php</file>
         </testsuite>
     </testsuites>
 
