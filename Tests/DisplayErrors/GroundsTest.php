@@ -6,9 +6,6 @@ class GroundsTest extends PHPUnit_Framework_TestCase {
   public function setUp() {
     $this->actionwords = new Actionwords();
 
-    // As a coffee lover
-    // I have to empty the grounds
-    // So I don't end up with a total mess around the coffee machine
     // Given the coffee machine is started
     $this->actionwords->theCoffeeMachineIsStarted();
     // And I handle everything except the grounds

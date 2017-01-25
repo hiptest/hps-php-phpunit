@@ -6,6 +6,9 @@ class CoffeeMachine {
   var $tankContent;
   var $beansContent;
   var $groundsContent;
+  var $displaySettings;
+  var $waterHardness;
+  var $grinder;
 
   function __construct() {
     $started = false;
@@ -16,6 +19,24 @@ class CoffeeMachine {
     $this->emptyGrounds();
 
     $this->coffeeServed = false;
+    $this->displaySettings = false;
+    $this->waterHardness = '2';
+    $this->grinder = 'medium';
+  }
+
+  public function showSettings() {
+    $this->displaySettings = true;
+  }
+
+  public function hideSettings() {
+    $this->displaySettings = false;
+  }
+
+  public function getSettings() {
+    return [
+      'water hardness' => $this->waterHardness,
+      'grinder' => $this->grinder
+    ];
   }
 
   public function start($lang = 'en') {
@@ -30,6 +51,10 @@ class CoffeeMachine {
   public function getMessage() {
     if (! $this->started) {
       return '';
+    }
+
+    if ($this->displaySettings) {
+      return $this->translateMessage('settings');
     }
 
     if ($this->tankContent <= 10) {
@@ -78,13 +103,15 @@ class CoffeeMachine {
         'tank' => 'Fill tank',
         'beans' => 'Fill beans',
         'grounds' => 'Empty grounds',
-        'ready' => 'Ready'
+        'ready' => 'Ready',
+        'settings' => "Settings:\n - 1: water hardness\n - 2: grinder"
       ],
       'fr' => [
         'tank' => 'Remplir reservoir',
         'beans' => 'Ajouter grains',
         'grounds' => 'Vider marc',
-        'ready' =>  'Pret'
+        'ready' =>  'Pret',
+        'settings' => "Configurer:\n - 1: durete de l'eau\n - 2: mouture"
       ]
     ];
 

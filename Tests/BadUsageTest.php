@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__.'/Actionwords.php');
 
-class WeirdSpecsTest extends PHPUnit_Framework_TestCase {
+class BadUsageTest extends PHPUnit_Framework_TestCase {
   public $actionwords;
   public function setUp() {
     $this->actionwords = new Actionwords();

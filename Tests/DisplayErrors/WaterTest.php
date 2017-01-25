@@ -6,9 +6,6 @@ class WaterTest extends PHPUnit_Framework_TestCase {
   public function setUp() {
     $this->actionwords = new Actionwords();
 
-    // As a coffee lover
-    // I have to handle the water tank
-    // So I can have coffee when I need it
     // Given the coffee machine is started
     $this->actionwords->theCoffeeMachineIsStarted();
     // And I handle everything except the water tank
