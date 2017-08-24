@@ -6,6 +6,7 @@ class CoffeeMachine {
   var $tankContent;
   var $beansContent;
   var $groundsContent;
+  var $countdownToDescale;
   var $displaySettings;
   var $waterHardness;
   var $grinder;
@@ -17,6 +18,7 @@ class CoffeeMachine {
     $this->fillTank();
     $this->fillBeans();
     $this->emptyGrounds();
+    $this->descale();
 
     $this->coffeeServed = false;
     $this->displaySettings = false;
@@ -65,9 +67,12 @@ class CoffeeMachine {
       return $this->translateMessage('beans');
     }
 
-
     if ($this->groundsContent >= 30) {
       return $this->translateMessage('grounds');
+    }
+
+    if ($this->isDescalingNeeded()) {
+      return $this->translateMessage('descale');
     }
 
     return $this->translateMessage('ready');
@@ -81,6 +86,7 @@ class CoffeeMachine {
       $this->tankContent -= 1;
       $this->beansContent -= 1;
       $this->groundsContent += 1;
+      $this->countdownToDescale -= 1;
     }
   }
 
@@ -95,7 +101,14 @@ class CoffeeMachine {
   public function emptyGrounds() {
     $this->groundsContent = 0;
   }
-  
+
+  public function descale() {
+    $this->countdownToDescale = 500;
+  }
+
+  public function isDescalingNeeded() {
+    return $this->countdownToDescale <= 0;
+  }
 
   private function translateMessage($key) {
     $i18n = [
@@ -104,14 +117,16 @@ class CoffeeMachine {
         'beans' => 'Fill beans',
         'grounds' => 'Empty grounds',
         'ready' => 'Ready',
-        'settings' => "Settings:\n - 1: water hardness\n - 2: grinder"
+        'settings' => "Settings:\n - 1: water hardness\n - 2: grinder",
+        'descale' => 'Descaling is needed'
       ],
       'fr' => [
         'tank' => 'Remplir reservoir',
         'beans' => 'Ajouter grains',
         'grounds' => 'Vider marc',
         'ready' =>  'Pret',
-        'settings' => "Configurer:\n - 1: durete de l'eau\n - 2: mouture"
+        'settings' => "Configurer:\n - 1: durete de l'eau\n - 2: mouture",
+        'descale' => 'Detartrage requis'
       ]
     ];
 
